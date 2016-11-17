@@ -2,22 +2,16 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
 	"net/http"
+	"net/http/httputil"
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf("Handling Request\n")
 	fmt.Println("URL:" + r.URL.String())
-	body, _ := ioutil.ReadAll(r.Body)
-	for k, v := range r.Header {
-		fmt.Print("\theaderKey = ")
-		fmt.Print("\t" + k)
-		fmt.Print("\theaderValue = ")
-		fmt.Printf("\t%s\n",v)
-	}
-	fmt.Print("body = ")
-	fmt.Println("\t",string(body))
+	s, _ := httputil.DumpRequest(r,true)
+	fmt.Printf("body = %s",string(s))
+
 	w.WriteHeader(http.StatusOK)
 }
 
