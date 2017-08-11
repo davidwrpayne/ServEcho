@@ -7,7 +7,7 @@ import (
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
-	fmt.Printf("Handling Request\n")
+	fmt.Printf("\nHandling Request\n")
 	fmt.Println("URL:" + r.URL.String())
 	s, _ := httputil.DumpRequest(r,true)
 	fmt.Printf("body = %s",string(s))
